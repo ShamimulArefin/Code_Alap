@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% block body_block %}
+
+{% comment %}
+<div class="glass-1 p-5 rounded">
+    <div class="col-sm-8 mx-auto">
+        <h1>Code Alap Blog</h1>
+    </div>
+</div>
+{% endcomment %}
+
+<div class="mt-4">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for blog in blogs %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="{{blog.image_url}}" class="card-img-top" alt="Code Alap">
+            <div class="card-body">
+              <h5 class="card-title"><a href="{% url 'blogApp:blogDetails' slug=blog.slug %}" style="text-decoration: none; color: #212529;">{{blog.blog_title}}</a></h5>
+              <p class="card-text">{{blog.blog_description}}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

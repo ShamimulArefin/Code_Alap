@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% block body_block %}
+
+
+{% for message in messageList %}
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card mb-2 glass-1">
+            <div class="card-header">
+                <h6 class="mb-2">Name: {{message.name}} &nbsp; Email: <a href="mailto:{{message.contact_mail}}" class="allB">{{message.contact_mail}}</a></h6>
+            </div>
+            <div class="card-body">
+                <h5 class="card-subtitle mb-2">{{message.subject}}</h5>
+                <p class="card-text">{{message.message}}</p>
+                <div class="text-end"><a href="{% url 'homeApp:deleteMessage' message_id=message.id %}" class="btn btn-danger">Delete</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

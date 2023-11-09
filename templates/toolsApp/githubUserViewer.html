@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% load myFilters %}
+{% block body_block %}
+
+<div class="ml-3 text-center">
+    <h4>Enter GitHub Username</h4>
+    <form method="POST">
+        <input type="text" name="username" required>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-info btn-sm" name="submit" value="Search">
+    </form>
+</div>
+
+<div class="container mt-4 ml-3 glass-1">
+    {% if user.message != 'Not Found' and viewUser == True %}
+    <div class="p-3 rounded">
+        <div class="col-sm-8 mx-auto text-center">
+            <img src="{{user.avatar_url}}" alt="Profile Image" class="rounded" height="100" width="100">
+            <h4>{{user.name | title}}</h4>
+            <p>{{user.bio}}</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mx-auto text-center">
+                <img class="img-fluid" src="https://github-readme-stats.vercel.app/api?username={{user.login}}&hide_title=true&hide_border=true&show_icons=true&include_all_commits=true&count_private=true&line_height=21&text_color=000&icon_color=000&theme=graywhite" />
+                <img class="img-fluid" src="https://github-readme-stats.vercel.app/api/top-langs/?username={{user.login}}&hide=html&hide_title=true&hide_border=true&layout=compact&langs_count=7&exclude_repo=comp426&text_color=000&icon_color=ffftheme=graywhite" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- info table -->
+        <div class="col-md-4">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Username</th>
+                    <th>{{user.login}}</th>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <th>{{user.email}}</th>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <th>{{user.location}}</th>
+                </tr>
+                <tr>
+                    <th>Blog</th>
+                    <th><a href="{{user.blog}}" target="_blank" class="allB">{{user.blog}}</a></th>
+                </tr>
+                <tr>
+                    <th>Company</th>
+                    {% if user.company %}
+                    <th><a href="https://github.com/{{user.company | gitCompany}}" target="_blank" class="allB">{{user.company | gitCompany}}</a></th>
+                    {% else %}
+                    <th></th>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Public Repository</th>
+                    <th>{{user.public_repos}}</th>
+                </tr>
+                <tr>
+                    <th>Public Gists</th>
+                    <th>{{user.public_gists}}</th>
+                </tr>
+                <tr>
+                    <th>Followers</th>
+                    <th>{{user.followers}}</th>
+                </tr>
+                <tr>
+                    <th>Following</th>
+                    <th>{{user.following}}</th>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <th>{{user.created_at | gitDate}}</th>
+                </tr>
+                <tr>
+                    <th>Updated</th>
+                    <th>{{user.updated_at | gitDate}}</th>
+                </tr>
+            </table>
+        </div>
+        <!-- repos -->
+        <div class="col-md-8">
+            <div class="row">
+                {% if user.public_repos != 0 %}
+                {% for repo in repos %}
+                {% if not repo.fork %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title"><a href="{{repo.html_url}}" target="_blank" class="allA">{{repo.name}}</a></h5>
+                          <p class="card-text">{{repo.description}}</p>
+                          <p><span><b>{{repo.language}}</b></span>&nbsp;&nbsp;<span style='font-size:20px;'><svg aria-label="stars" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-star">
+                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path>
+                        </svg> {{repo.stargazers_count}}</span>&nbsp;&nbsp;<span style='font-size:20px;'><svg aria-label="fork" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-repo-forked">
+                            <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
+                            </svg> {{repo.forks_count}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <h3>No Repository Found!</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% elif user.message == 'Not Found'%}
+    <div class="bg-light p-5 rounded text-center">
+        <div class="col-sm-8 mx-auto">
+            <h3>GitHub User not found!</h3>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% block body_block %}
+
+<div class="glass-1 p-5 rounded">
+    <div class="col-sm-8 mx-auto">
+        {% if created %}
+        <h4 class="alert alert-success">Category Creation Successful!</h4>
+        <a class="btn btn-primary" href="{% url 'blogApp:createCategory' %}">Add Category</a>
+        <a class="btn btn-primary" href="{% url 'blogApp:allCategories' %}">View Categories</a>
+        {% else %}
+        <h2>Add Category</h2>
+        <form method="POST">
+            <div class="form-floating mb-3">
+                <input type="text" name="cat_name" class="form-control" id="floatingInput" placeholder="Type Full Name" required>
+                <label for="floatingInput">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="cat_slug" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                <label for="floatingInput">Slug</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="cat_description" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                <label for="floatingInput">Meta Description</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="cat_image" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                <label for="floatingInput">Image URL</label>
+            </div>
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input type="submit" name="submit" value="Add Category" class="btn btn-primary mt-2">
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

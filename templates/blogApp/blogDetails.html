@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% load custom_filters %}
+{% block body_block %}
+<div class="col-md-12 text-center">
+    <img src="{{blog.image_url}}" class="text-center" alt="..." height="400px" width="800px">
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="card" style="background:none; border:none;">
+            <div class="card-body">
+              <h1 class="card-title text-center mb-5">{{blog.blog_title}}</h1>
+              <p class="card-text">{{blog.blog_content | markdown | safe}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+{% endblock %}

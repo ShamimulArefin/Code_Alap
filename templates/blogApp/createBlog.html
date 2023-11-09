@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% block body_block %}
+
+<div class="glass-1 p-5 rounded">
+    <div class="col-sm-12 mx-auto">
+        {% comment %}
+        {% if valid %}
+        <h4 class="alert alert-success">Successfully Published!</h4>
+        <a class="btn btn-primary btn-sm ml-2" href="{% url 'blogApp:createBlog' %}">Write Another</a>
+        <a class="btn btn-primary btn-sm ml-2" href="{% url 'blogApp:blog' %}">Blog Page</a>
+        {% else %}
+        <h2 class="text-center">What's on your mind?</h2>
+        <div class="mt-4">
+            {{form.author}}
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Title</label>
+                    <input type="text" name="blog_title" class="form-control" id="exampleFormControlInput1" placeholder="Enter Blog Title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Slug</label>
+                    <input type="text" name="slug" class="form-control" id="exampleFormControlInput1" placeholder="Enter Blog Slug" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Meta Description (max 160 char)</label>
+                    <input type="text" name="blog_description" class="form-control" id="exampleFormControlInput1" placeholder="Enter Meta Description" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Image URL</label>
+                    <input type="text" name="image_url" class="form-control" id="exampleFormControlInput1" placeholder="Enter Image URL" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Blog tags (meta keywords)</label>
+                    <input type="text" name="blog_tags" class="form-control" id="exampleFormControlInput1" placeholder="Enter meta Tags" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="15"></textarea>
+                </div>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="submit" name="submit" value="Publish" class="btn btn-primary mt-2">
+                </div>
+            </form>
+        </div>
+        {% endif %}
+        {%endcomment %}
+        
+        {% if valid %}
+        <h4 class="alert alert-success">Successfully Published!</h4>
+        <a class="btn btn-primary btn-sm ml-2" href="{% url 'blogApp:createBlog' %}">Write Another</a>
+        <a class="btn btn-primary btn-sm ml-2" href="{% url 'blogApp:blog' %}">Blog Page</a>
+        {% else %}
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success btn-sm">Publish</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

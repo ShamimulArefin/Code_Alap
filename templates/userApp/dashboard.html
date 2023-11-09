@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% block body_block %}
+
+<div class="glass-1 p-5 rounded">
+    <div class="col-sm-8 mx-auto">
+        <h2 class="text-center mb-4">Author Dashboard</h2>
+        <h5>Username: <a href="{% url 'userApp:authorProfile' username=user.username %}" style="text-decoration: none;">{{ user.username }}</a> <a href="{% url 'userApp:editProfile' %}" class="btn btn-info btn-sm">Edit</a></h5>
+        <hr>
+        <br>
+        
+        <a href="{% url 'blogApp:createBlog' %}" class="btn btn-primary">Write</a>
+        <a href="{% url 'blogApp:editBlogPage' %}" class="btn btn-primary">Edit Posts</a>
+        <a href="{% url 'blogApp:createCategory' %}" class="btn btn-primary">Add Category</a>
+        <a href="{% url 'blogApp:allCategories' %}" class="btn btn-primary">All Category</a>
+        <a href="{% url 'homeApp:viewMessages' %}" class="btn btn-primary">Messages</a>
+    </div>
+</div>
+
+{% endblock %}

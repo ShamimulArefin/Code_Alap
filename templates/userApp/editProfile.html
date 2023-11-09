@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% block body_block %}
+
+<div class="glass-1 p-5 rounded">
+    <div class="col-sm-8 mx-auto">
+        <h2 class="text-center">Edit Profile Info</h2>
+        <form method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning btn-sm">Change</button>
+        </form>
+        <!-- <form method="POST">
+            <div class="form-floating mb-3">
+                <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
+                <label for="floatingInput">username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="email">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="row g-2">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="first_name" class="form-control" id="floatingInput" placeholder="first name">
+                        <label for="floatingInput">First Name</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="last_name" class="form-control" id="floatingInput" placeholder="last name">
+                        <label for="floatingInput">Last Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input type="submit" name="submit" value="Create Account" class="btn btn-primary mt-2">
+            </div>
+        </form> -->
+    </div>
+</div>
+
+{% endblock %}

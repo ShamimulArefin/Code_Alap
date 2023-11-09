@@ -1,0 +1,67 @@
+body {
+    background: #f7f4fe;
+    /* background: #F7FAFF; */
+    /* background: #E4E8E9; */
+}
+
+.allA {
+    text-decoration: none;
+    color: blue;
+}
+.allB {
+    text-decoration: none;
+    color: #212529;
+}
+
+.glass-1 {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: #ffffff73;
+    border-radius: 12px;
+    border: 1px solid #d1d5db4d;
+}
+
+
+/* .content {
+    padding: 7rem 0; }
+    
+.contact-heading {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.contact-form {
+    border: none;
+    background: #f3f3f3; }
+    .contact-form:active, .contact-form:focus {
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border-color: #000;
+      background: #f3f3f3; }
+  
+  .col-form-label {
+    color: #000; }
+  
+  .btn-send, .contact-form, .custom-select {
+    height: 50px; }
+  
+  .custom-select:active, .custom-select:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: #000; }
+  
+  .btn-send {
+    border: none;
+    border-radius: 4px !important; }
+    .btn-send {
+      background: #000;
+      color: #fff;
+      padding: 15px 20px; }
+    .btn-send:hover {
+      color: #fff; }
+    .btn-send:active, .btn-send:focus {
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none; } */

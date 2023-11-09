@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title_block %} {{title}} {% endblock %}
+{% load static %}
+{% block body_block %}
+
+<form method="POST">
+    <div class="form-floating mb-3">
+        <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Type Full Name" required>
+        <label for="floatingInput">Full Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="email" name="contact_mail" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+        <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" name="subject" class="form-control" id="floatingInput" placeholder="Subject" required>
+        <label for="floatingInput">Subject</label>
+    </div>
+    <div class="form-floating">
+        <textarea name="message" class="form-control" placeholder="Leave a message here" id="floatingTextarea2" style="height: 100px" required></textarea>
+        <label for="floatingTextarea2">Message</label>
+    </div>
+    {% csrf_token %}
+    <div class="form-floating">
+        <input type="submit" name="submit" value="Send Message" class="btn btn-primary mt-2">
+    </div>
+</form>
+
+{% if success_text %}
+<h4 class="alert alert-success mt-2">{{ success_text }}</h4>
+{% endif %}
+{% endblock %}
